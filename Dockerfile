@@ -36,4 +36,4 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && rm -rf /root/.npm
 
     
-ENTRYPOINT ["./docker/docker-entrypoint.sh"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
