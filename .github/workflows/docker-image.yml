@@ -15,9 +15,9 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v2
-      - name: install oicq
-        id: oicq
-        uses: lhpmain/docker-oicq@v1
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=today::$(date +'%Y-%m-%d_%H-%M')"
         with:
           version: latest
       - name: build the image
