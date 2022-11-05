@@ -1,7 +1,5 @@
 FROM python:3-slim
 
-MAINTAINER="lhpmain"
-
 ENV PNPM_HOME=/root/.local/share/pnpm \
     PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/.local/share/pnpm:/root/.local/share/pnpm/global/5/node_modules:$PNPM_HOME \
     LANG=zh_CN.UTF-8 \
@@ -21,7 +19,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
                              tzdata \
                              perl \
                              openssl \
-                             nginx \
                              nodejs \
                              jq \
                              openssh \
