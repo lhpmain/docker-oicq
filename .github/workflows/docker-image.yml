@@ -27,22 +27,13 @@ jobs:
       with:
      #这里用到了github的secrets功能，避免账户和密码随仓库泄露
        username: ${{ secrets.DOCKERHUB_USERNAME }}
-       password: ${{ secrets.DOCKERHUB_TOKEN }}
+       password: ${{ secrets.DOCKERHUB_PASSWORD }}
     - name: Build and push
       #导入这个模块来完成自动编译和推送
       uses: docker/build-push-action@v3
       with:
           context: .
-          push: true
+          push: false
           #在这里通过加入需要编译的平台和前面配好的QEMU，buildx来达到多平台编译
           platforms: linux/amd64,linux/arm64,linux/arm
-          #指定用户/仓库名
-          tags: wmdscjhdpy/test:latest
-    - name: Docker Hub Description
-      #这里是通过md文件自动生成dockerhub描述的模块，也可以不需要
-      uses: peter-evans/dockerhub-description@v3
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
-        repository: wmdscjhdpy/autologin
-        readme-filepath: ./doc/docker-readme.md
+
