@@ -27,3 +27,4 @@ RUN apk --no-cache add -f bash \
     && rm -rf /root/.local/share/pnpm/store \
     && rm -rf /root/.cache \
     && rm -rf /root/.npm
+    
