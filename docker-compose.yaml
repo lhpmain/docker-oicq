@@ -1,14 +1,13 @@
 
-cmversion: "1"
+version: "3"
 services:
   miraiok:
     network_mode: "host"
-    image: lhpmain/oicq:arm
-    ports:
-      - "0.0.0.0:8009:8009"
-    restart: unless-stopped
+    image: oicq:v1
+    restart: always
     volumes:
-      - /root/oicq:/root/.oicq
+      - ./config.js:/root/config.js
+      - ./data:/root/data
     stdin_open: true
     tty: true
     container_name: docker-oicq
