@@ -1,9 +1,9 @@
-FROM python:3.8.8-alpine3.13
-# FROM python:alpine
+FROM python:3.11-alpine3.16
+# FROM python:3.11-alpine
 
 ARG OICQ_MAINTAINER="lhpmain"
 LABEL maintainer="${OICQ_MAINTAINER}"
-ARG OICQ_URL=https://github.com/${OICQ_MAINTAINER}/docker-oicq.git
+ARG OICQ_URL=https://github.com/${OICQ_MAINTAINER}/oicq-template.git
 ARG OICQ_BRANCH=main
 
 ENV PNPM_HOME=/root/.local/share/pnpm \
@@ -34,17 +34,16 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && rm -rf /var/cache/apk/* \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
-    && git clone -b ${OICQ_BRANCH} ${OICQ_URL} ${OICQ_DIR} \
     && cd ${OICQ_DIR} \
+    && git clone -b ${OICQ_BRANCH} ${OICQ_URL} ${OICQ_DIR} \
     && chmod 777 ${OICQ_DIR}/*.sh \
     && npm install -g pnpm \
     && npm install -g n \
     && n lts \
     && pnpm add -g pm2 \
-    && npm i -g oicq@1 \
     && rm -rf /root/.pnpm-store \
     && rm -rf /root/.local/share/pnpm/store \
     && rm -rf /root/.cache \
     && rm -rf /root/.npm
-EXPOSE 8008 8089
-# ENTRYPOINT ["./docker-entrypoint.sh"]
+EXPOSE 8008 8089 
+ENTRYPOINT ["./docker-entrypoint.sh"]
